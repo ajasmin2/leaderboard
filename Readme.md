@@ -1,15 +1,16 @@
-# Leaderboard API Endpoints
+# Leaderboard API Service
 
-This document provides an overview of the available API endpoints for the Leaderboard service. The API allows for the retrieval, creation, and updating of leaderboard entries.
+This document provides the setup information and an overview of the available API endpoints for the Leaderboard service. The API allows for the retrieval, creation, and updating of leaderboard entries.
 
 
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [Service Setup](#project-setup)
-2. [Create Admin User](#useradmin)
-3. [Authentication](#authentication)
-3. [Leaderboard Endpoints](#endpoints)
+2. [Diagram](#diagram)
+3. [Service Setup](#project-setup)
+4. [Create Admin User](#useradmin)
+5. [Authentication](#authentication)
+6. [Leaderboard Endpoints](#leaderboard-endpoints)
    - [Create Leaderboard](#create-leaderboard)
    - [Get Leaderboard list](#get-leaderboards-list)
    - [Delete Leaderboard (Soft Delete)](#delete-leaderboard)
@@ -23,6 +24,12 @@ This document provides an overview of the available API endpoints for the Leader
 ## Introduction
 
 The Leaderboard API provides a set of RESTful endpoints to interact with leaderboard data. You can use these endpoints to fetch, create, and update leaderboard entries.
+
+## Diagram
+
+ ![alt text](leaderboard.png)
+
+ 
 
 ## Project Setup
   
