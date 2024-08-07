@@ -1,0 +1,41 @@
+test_name: Leaderboard Create
+
+includes:
+  - !include config.yml
+
+strict:
+  - headers:on
+  - json:on
+
+stages:
+  - name: Validate Leaderboard Create
+    request:
+      url: "{url.api:s}/leaderboards"
+      method: POST
+      headers:
+        $ext:
+          function: testing_utils:authorization_password_user
+        content-type: application/json
+        accept: application/json
+      json:
+        name: "Test Tavern Leaderboard"
+    response:
+      status_code: 
+        - 201
+        - 409
+  - name: Validate Leaderboard Create Rank
+    request:
+      url: "{url.api:s}/leaderboards"
+      method: POST
+      headers:
+        $ext:
+          function: testing_utils:authorization_password_user
+        content-type: application/json
+        accept: application/json
+      json:
+        name: "River Run"
+    response:
+      status_code: 
+        - 201
+        - 409
+ 

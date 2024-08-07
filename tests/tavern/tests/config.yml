@@ -1,0 +1,14 @@
+# config.yaml
+---
+# Each file should have a name and description
+name: Common configuration
+description: Common configuration
+
+# Variables should just be a mapping of key: value pairs
+variables:
+  url:
+    api: "{tavern.env_vars.API_SERVICE_URL}"
+  leaderboard:
+    leaderboard_to_change: "{tavern.env_vars.TEST_LEADERBOARD_ENABLE_DISABLE}"
+    leaderboard_to_rank: "{tavern.env_vars.TEST_LEADERBOARD_INSERT_USERS}"
+    test_player: "{tavern.env_vars.TEST_PLAYER}"

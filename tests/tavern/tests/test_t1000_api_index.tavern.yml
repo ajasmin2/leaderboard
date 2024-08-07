@@ -1,0 +1,33 @@
+test_name: Leaderboard Service Index
+
+includes:
+  - !include config.yml
+
+strict:
+  - headers:on
+  - json:on
+
+stages:
+  - name: Validate Index
+    request:
+      url: "{url.api:s}/index"
+      method: GET
+    response:
+      status_code: 200
+      json:
+        service: !anystr
+        version: !anystr
+      verify_response_with:
+        function: tavern.helpers:validate_pykwalify
+        extra_kwargs:
+          schema:
+            type: map
+            mapping:
+              service:
+                type: str
+                required: True
+              version:
+                type: str
+                required: True
+
+

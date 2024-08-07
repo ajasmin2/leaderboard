@@ -1,0 +1,51 @@
+services:
+  phpserv:
+    build:
+      context: .
+    entrypoint: php artisan octane:frankenphp --workers=1 --max-requests=1
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./leaderboard:/app
+  mysql:
+    image: mysql:9.0.1
+    security_opt:
+      - "no-new-privileges:true"
+    container_name: leaderboard_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: leaderboard
+      MYSQL_USER: leaderboard
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+  redis:
+    image: redis:7.4.0-alpine
+    container_name: redis_cache_service
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX8EwVmmxKredis
+    volumes:
+      - redis_data:/data
+  tavern-tests:
+    container_name: tavern_api_tests
+    build:
+      context: ./tests/tavern
+      dockerfile: Dockerfile.tavern
+    security_opt:
+      - "no-new-privileges:true"
+    volumes:
+      - ./tests/tavern/tests:/tests
+    env_file:
+      - ./tests/tavern/.env.tavern
+    working_dir: /
+    command: pytest ./tests --disable-pytest-warnings -vv
+
+volumes:
+    mysql_data:
+    redis_data:
+      driver: local

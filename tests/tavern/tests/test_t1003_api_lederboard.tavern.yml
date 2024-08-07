@@ -1,0 +1,34 @@
+test_name: Leaderboard Disable and Enable
+
+includes:
+  - !include config.yml
+
+strict:
+  - headers:on
+  - json:on
+
+stages:
+  - name: Validate Leaderboard Disable
+    request:
+      url: "{url.api:s}/leaderboards/{leaderboard.leaderboard_to_change:s}"
+      method: DELETE
+      headers:
+        $ext:
+          function: testing_utils:authorization_password_user
+        accept: application/json
+    response:
+      status_code: 
+        - 204
+        - 409
+  
+  - name: Validate Leaderboard Disable
+    request:
+      url: "{url.api:s}/leaderboards/{leaderboard.leaderboard_to_change:s}/enable"
+      method: PATCH
+      headers:
+        $ext:
+          function: testing_utils:authorization_password_user
+        accept: application/json
+    response:
+      status_code: 
+        - 200

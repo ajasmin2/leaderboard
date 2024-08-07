@@ -1,0 +1,40 @@
+test_name: Leaderboard Get Player Rank
+
+includes:
+  - !include config.yml
+
+strict:
+  - headers:on
+  - json:on
+
+stages:
+  - name: Get Player Rank
+    request:
+      url: "{url.api:s}/leaderboards/{leaderboard.leaderboard_to_rank:s}/players/{leaderboard.test_player:s}/rank"
+      method: GET
+      headers:
+        $ext:
+          function: testing_utils:authorization_password_user
+        accept: application/json
+    response:
+      status_code: 200
+      verify_response_with:
+        function: tavern.helpers:validate_pykwalify
+        extra_kwargs:
+          schema:
+            type: map
+            mapping:
+              leaderbord_name:
+                type: str
+                required: True
+              leaderbord_id:
+                type: int
+                required: True
+              plyer_rank:
+                type: int
+                required: True
+              player_score:
+                type: int
+                required: False
+
+

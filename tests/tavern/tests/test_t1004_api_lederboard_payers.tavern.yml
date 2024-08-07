@@ -1,0 +1,24 @@
+test_name: Leaderboard Add and Update Players Scores
+
+includes:
+  - !include config.yml
+
+strict:
+  - headers:on
+  - json:on
+
+stages:
+  - name: Validate Leaderboard Add or Update Players
+    request:
+      url: "{url.api:s}/leaderboards/{leaderboard.leaderboard_to_rank:s}/players"
+      method: POST
+      headers:
+        $ext:
+          function: testing_utils:authorization_password_user
+        accept: application/json
+        content-type: application/json
+      json: !include players_to_add.json
+    response:
+      status_code: 
+        - 204
+
