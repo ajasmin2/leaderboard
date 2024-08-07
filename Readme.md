@@ -60,7 +60,7 @@ The Leaderboard API provides a set of RESTful endpoints to interact with leaderb
   Content-Type: application/json
   Accept: application/json
 
-  Body:
+  Request Body:
 
   {
       "name": "admin3",
@@ -90,7 +90,7 @@ All leaderboard endpoints require authentication via an API key. You can obtain 
   Content-Type: application/json
   Accept: application/json
 
-  Body:
+  Request Body:
 
   {
       "email": "admin@email.com",
@@ -108,9 +108,9 @@ All leaderboard endpoints require authentication via an API key. You can obtain 
 
 
 ### Create Leaderboard
+- **Description**: Create a new leaderboard.
 - **URL**: `http://127.0.0.1:8000/api/leaderboards`
 - **Method**: `POST`
-- **Description**: Create a new leaderboard.
 - **Headers**:
   - Authorization: Bearer your_api_key_token
   - Accept: application/json
@@ -122,11 +122,11 @@ All leaderboard endpoints require authentication via an API key. You can obtain 
 
 
 ```http
-GET http://127.0.0.1:8000/api/leaderboards HTTP/1.1
+POST http://127.0.0.1:8000/api/leaderboards HTTP/1.1
 Authorization: Bearer 4|gPq6WVEfyLSjKT8noFYYhfpNoqxYl5rwx40mh2TIf3d9b154
 Accept: application/json
 
-Body:
+Request Body:
 {
     "name": "Duck Hunt"
 }
@@ -144,9 +144,9 @@ Response:
 
 ### Get Leaderboards List
 
+- **Description**: Retrieves the list of leaderboard entries.
 - **URL**: `http://127.0.0.1:8000/api/leaderboards`
 - **Method**: `GET`
-- **Description**: Retrieves the list of leaderboard entries.
 - **Headers**:
   - Authorization: Bearer your_api_key_token
   - Accept: application/json
@@ -183,11 +183,11 @@ Response:
 
 ### Delete Leaderboard
 
+- **Description**: Delete a leaderboard (soft delete).
 - **URL**: `http://127.0.0.1:8000/api/leaderboards/{LEADERBOARD_ID}`
   - **In path**:
     - LEADERBOARD_ID: (int) The leaderboard id.
 - **Method**: `DELETE`
-- **Description**: Delete a leaderboard (soft delete).
 - **Headers**:
   - Authorization: Bearer your_api_key_token
   - Accept: application/json
@@ -205,11 +205,11 @@ Accept: application/json
 
 ### Enable Leaderboard
 
+- **Description**: Enable a leaderboard.
 - **URL**: `http://127.0.0.1:8000/api/leaderboards/{LEADERBOARD_ID}/enable`
   - **In path**:
     - LEADERBOARD_ID: (int) The leaderboard id.
-- **Method**: `DELETE`
-- **Description**: Enable a leaderboard.
+- **Method**: `PATCH`
 - **Headers**:
   - Authorization: Bearer your_api_key_token
   - Accept: application/json
@@ -237,11 +237,12 @@ Response:
 ```
 
 ### Adding users into a leaderboard
+
+- **Description**: Add or update users scores leaderboard. The new score is going to be summed up to the old one.
 - **URL**: `http://127.0.0.1:8000/api/leaderboards/{LEADERBOARD_ID}/players`
   - **In path**:
     - LEADERBOARD_ID: (int) The leaderboard id.
 - **Method**: `POST`
-- **Description**: Add or update users scores leaderboard. The new score is going to be summed up to the old one.
 - **Headers**:
   - Authorization: Bearer your_api_key_token
   - Accept: application/json
@@ -260,7 +261,7 @@ Authorization: Bearer 4|gPq6WVEfyLSjKT8noFYYhfpNoqxYl5rwx40mh2TIf3d9b154
 Accept: application/json
 Content-Type: application/json
 
-Body:
+Request Body:
 [
     {
     "player_id": "Westplayer1",
@@ -279,12 +280,13 @@ Body:
 ```
 
 ### Get player rank
+
+- **Description**: Get a user's rank in a leaderboard.
 - **URL**: `http://127.0.0.1:8000/api/leaderboards/{LEADERBOARD_ID}/players/{PLAYER_ID}/rank`
   - **In path**:
     - LEADERBOARD_ID: (int) The leaderboard id.
     - PLAYER_ID: (string) The user id.
 - **Method**: `GET`
-- **Description**: Get a user's rank in a leaderboard.
 - **Headers**:
   - Authorization: Bearer your_api_key_token
   - Accept: application/json
