@@ -35,14 +35,17 @@ class playersLeaderboardsController extends Controller
 
     private function get_valid_player_rank(int $leaderboard_id, string $player_id) {
         $rank = Redis::zrevrank('ranking_leaderboard_'.$leaderboard_id, $player_id);
-        if (!$rank) {
-            $message =  [
-                'message' => 'User not Found In Leaderbord'
-            ];
-            return response()->json($message, 404);
+        
+        if ($rank !== false) {
+            return $rank;
         }
 
-        return $rank;
+        $message =  [
+            'message' => 'User not Found In Leaderbord'
+        ];
+        return response()->json($message, 404);
+
+        
     }
 
     private function update_or_add_player(object $player, int $leaderboard_id) {
