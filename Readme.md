@@ -47,7 +47,7 @@ The Leaderboard API provides a set of RESTful endpoints to interact with leaderb
     docker-compose up seeder
     ```
 
-    Note: 2 Million User is set by default. You can change this valie in variable PLAYERS_LIMIT in /seeder .env file.
+    Note: 3 Million User is set by default. You can change this valie in variable PLAYERS_LIMIT in /seeder .env file.
 
   4. Running the api automated tests (wait until seeder ends the fillup process):
 
