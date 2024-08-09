@@ -1,0 +1,62 @@
+test_name: Leaderboard Add Players and Verify Ranks
+
+includes:
+  - !include config.yml
+
+strict:
+  - headers:on
+  - json:on
+
+stages:
+  - name: Create a random leaderboard
+    request:
+      url: "{url.api:s}/leaderboards"
+      method: POST
+      headers:
+        $ext:
+          function: testing_utils:authorization_password_user
+        content-type: application/json
+        accept: application/json
+      json:
+        $ext: 
+          function: testing_utils:create_random_leaderboard_name
+    response:
+      status_code: 
+        - 201
+      save:
+        json:
+          leaderboard_id: leaderboard.id
+
+  
+  - name: Validate Leaderboard Add Players Ranks
+    request:
+      url: "{url.api:s}/leaderboards/{leaderboard_id}/players"
+      method: POST
+      headers:
+        $ext:
+          function: testing_utils:authorization_password_user
+        accept: application/json
+        content-type: application/json
+      json: !include rank_players_to_validate.json
+    response:
+      status_code: 
+        - 204
+
+  - name: Validate Leaderboard Get Players Ranks
+    request:
+      url: "{url.api:s}/leaderboards/{leaderboard_id}/players?offset=1&limit=10"
+      method: GET
+      headers:
+        $ext:
+          function: testing_utils:authorization_password_user
+        accept: application/json
+        content-type: application/json
+      json: !include rank_players_to_validate.json
+    response:
+      status_code: 
+        - 200
+      verify_response_with:
+        function: testing_utils:validate_ranks
+        extra_kwargs:
+          expected_ranks: !include rank_players_to_validate.json
+

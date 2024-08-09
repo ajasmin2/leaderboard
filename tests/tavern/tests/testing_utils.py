@@ -1,11 +1,21 @@
 import os
 import requests
+import uuid
+import json
 from box import Box
 from filecache import filecache
 from pykwalify.core import Core
 from pykwalify.errors import SchemaError
-import json
 
+
+def validate_ranks(response, expected_ranks):
+    # Validate that users and ranks match according theirs values previously added
+    assert response.json().get("leaderboard_ranks") == expected_ranks
+
+
+def create_random_leaderboard_name():
+    sufix = name = str(uuid.uuid4())[:8]
+    return Box({"name": f"random_leaderboard_{sufix}"})
 
 @filecache(60)
 def authorization_password_user():

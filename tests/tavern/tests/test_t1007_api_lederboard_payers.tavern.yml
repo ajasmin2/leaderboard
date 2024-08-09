@@ -38,7 +38,7 @@ stages:
                       rank:
                         type: int
                         required: True
-                      player:
+                      player_id:
                         type: str
                         required: True
                       score:

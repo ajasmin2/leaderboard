@@ -153,7 +153,7 @@ class playersLeaderboardsController extends Controller
      *  "leaderboard_ranks": [
      *      {
      *           "rank": int,
-     *           "player": string,
+     *           "player_id": string,
      *           "score": int
      *      },...
      *  ]
@@ -192,7 +192,7 @@ class playersLeaderboardsController extends Controller
 
         $rank = $offset + 1;
         foreach ($ranks as $player => $score) {
-            $rankedResults[] = ['rank' => $rank, 'player' => $player, 'score' => $score];
+            $rankedResults[] = ['rank' => $rank, 'player_id' => $player, 'score' => $score];
             $rank++;
         }
 
@@ -284,7 +284,7 @@ class playersLeaderboardsController extends Controller
      *  "leaderboard_ranks": [
      *      {
      *           "rank": int,
-     *           "player": string,
+     *           "player_id": string,
      *           "score": int
      *      },...
      *  ]
@@ -339,7 +339,7 @@ class playersLeaderboardsController extends Controller
 
         $rank = $offset + 1;
         foreach ($ranks as $player => $score) {
-            $rankedResults[] = ['rank' => $rank, 'player' => $player, 'score' => $score];
+            $rankedResults[] = ['rank' => $rank, 'player_id' => $player, 'score' => $score];
             $rank++;
         }
 

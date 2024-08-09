@@ -40,8 +40,16 @@ The Leaderboard API provides a set of RESTful endpoints to interact with leaderb
     ```bash
     docker-compose up mysql redis phpserv
     ```
+  
+  3. Fillup database with a seeder script (wait until services above gets fully started):
 
-  3. Running the api automated tests (wait until services above gets fully started):
+    ```bash
+    docker-compose up seeder
+    ```
+
+    Note: 2 Million User is set by default. You can change this valie in variable PLAYERS_LIMIT in /seeder .env file.
+
+  4. Running the api automated tests (wait until seeder ends the fillup process):
 
     ```bash
     docker-compose up tavern-tests
